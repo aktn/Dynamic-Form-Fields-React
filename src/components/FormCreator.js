@@ -13,7 +13,12 @@ const styles = {
 const FormCreator = props => {
   return (
     <div>
-      <Text field={props.field} changed={props.changed}></Text>
+      <Text
+        field={props.field}
+        placeholder="Type here.."
+        styles={styles}
+        changed={props.changed}
+      ></Text>
       <DropDown
         elements={types}
         styles={styles}

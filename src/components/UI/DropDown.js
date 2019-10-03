@@ -12,10 +12,9 @@ const DropDown = props => {
     border: 1px solid #fff;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-position: right 50%;
+    background-position: right 60%;
     background-repeat: no-repeat;
     background-image: url("http://cdn.onlinewebfonts.com/svg/img_295694.svg");
-    padding: 0.5em;
     background-size: 10px;
   `;
 
