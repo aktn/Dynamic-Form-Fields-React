@@ -2,11 +2,22 @@ import React, { Component } from "react";
 import FormCreator from "./components/FormCreator";
 import DisplayForm from "./components/DisplayForm";
 
+const temp = [
+  {
+    question: "Question 1",
+    type: "dropDown"
+  },
+  {
+    question: "Question 2",
+    type: "text"
+  }
+];
+
 class App extends Component {
   state = {
-    questions: [],
+    questions: temp,
     field: "",
-    type: ""
+    type: "text"
   };
 
   handleFieldChange = value => {
@@ -14,18 +25,17 @@ class App extends Component {
     this.addQuestions(value);
   };
 
-  handleTypeChange = value => {
-    this.setState({ type: value });
-  };
-
   addQuestions = data => {
+    const type = this.state.type;
+    const item = { question: data, type: type };
     this.setState(prevState => ({
-      questions: [...prevState.questions, data]
+      questions: [...prevState.questions, item]
     }));
   };
 
-  handleSelectChange = () => {
-    console.log("y");
+  handleSelectChange = e => {
+    const value = e.target.value;
+    this.setState({ type: value });
   };
 
   render() {
@@ -39,7 +49,11 @@ class App extends Component {
           selection={type}
           changeSelection={this.handleSelectChange}
         ></FormCreator>
-        <DisplayForm test={field} changed={this.handleTypeChange}></DisplayForm>
+        <DisplayForm
+          value={type}
+          items={this.state.questions}
+          changed={this.handleTypeChange}
+        ></DisplayForm>
       </div>
     );
   }

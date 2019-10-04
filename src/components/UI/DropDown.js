@@ -12,7 +12,7 @@ const DropDown = props => {
     border: 1px solid #fff;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-position: right 60%;
+    background-position: 99% 50%;
     background-repeat: no-repeat;
     background-image: url("http://cdn.onlinewebfonts.com/svg/img_295694.svg");
     background-size: 10px;
@@ -20,9 +20,6 @@ const DropDown = props => {
 
   return (
     <Select value={props.selection} onChange={props.changed}>
-      <option value="" hidden>
-        Type
-      </option>
       {props.elements.map(option => (
         <option key={option} value={option}>
           {option}

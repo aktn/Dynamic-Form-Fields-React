@@ -2,7 +2,7 @@ import React from "react";
 import Text from "./UI/Text";
 import DropDown from "./UI/DropDown";
 
-const types = ["text", "select", "textarea"];
+const types = ["text", "dropDown", "textarea"];
 const styles = {
   width: "50%",
   height: "35px",
@@ -22,6 +22,7 @@ const FormCreator = props => {
       <DropDown
         elements={types}
         styles={styles}
+        selection={props.selection}
         changed={event => props.changeSelection(event)}
       ></DropDown>
     </div>
