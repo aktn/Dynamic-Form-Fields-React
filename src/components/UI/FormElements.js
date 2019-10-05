@@ -1,6 +1,7 @@
 import React from "react";
 import Text from "./Text";
 import DropDown from "./DropDown";
+import CheckBox from "./Checkbox";
 
 const FormElements = props => {
   let element = [];
@@ -12,7 +13,9 @@ const FormElements = props => {
     color: "gray"
   };
 
-  switch (props.element) {
+  // console.log(props.element.config.options);
+
+  switch (props.element.type) {
     case "text":
       element = (
         <Text
@@ -32,6 +35,9 @@ const FormElements = props => {
           changed={event => props.changeSelection(event)}
         ></DropDown>
       );
+      break;
+    case "checkBox":
+      element = <CheckBox></CheckBox>;
       break;
   }
 

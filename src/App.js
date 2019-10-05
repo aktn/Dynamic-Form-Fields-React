@@ -10,6 +10,14 @@ const temp = [
   {
     question: "Question 2",
     type: "text"
+  },
+  {
+    question: "Question 3",
+    type: "checkBox"
+  },
+  {
+    question: "Question 4",
+    type: "checkBox"
   }
 ];
 
