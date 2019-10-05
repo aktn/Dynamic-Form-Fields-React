@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createContext } from "react";
 import FormCreator from "./components/FormCreator";
 import DisplayForm from "./components/DisplayForm";
 
@@ -21,10 +21,12 @@ const temp = [
   }
 ];
 
+export const { Provider, Consumer } = createContext();
+
 class App extends Component {
   state = {
     questions: temp,
-    field: "",
+    field: "dd",
     type: "text"
   };
 
@@ -51,17 +53,24 @@ class App extends Component {
 
     return (
       <div className="App">
-        <FormCreator
-          value={field}
-          changed={this.handleFieldChange}
-          selection={type}
-          changeSelection={this.handleSelectChange}
-        ></FormCreator>
-        <DisplayForm
-          value={type}
-          items={this.state.questions}
-          changed={this.handleTypeChange}
-        ></DisplayForm>
+        <Provider
+          value={{
+            state: field
+          }}
+        >
+          <FormCreator
+            value={field}
+            changed={this.handleFieldChange}
+            selection={type}
+            changeSelection={this.handleSelectChange}
+          ></FormCreator>
+
+          <DisplayForm
+            value={type}
+            items={this.state.questions}
+            changed={this.handleTypeChange}
+          ></DisplayForm>
+        </Provider>
       </div>
     );
   }

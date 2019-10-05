@@ -1,6 +1,5 @@
 import React from "react";
 import FormElements from "./UI/FormElements";
-import CheckBox from "./UI/Checkbox";
 
 const DisplayForm = props => {
   const items = props.items.map((item, i) => {
@@ -15,7 +14,6 @@ const DisplayForm = props => {
   return (
     <div>
       Display Form
-      {props.test}
       {items}
     </div>
   );

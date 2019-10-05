@@ -13,8 +13,6 @@ const FormElements = props => {
     color: "gray"
   };
 
-  // console.log(props.element.config.options);
-
   switch (props.element.type) {
     case "text":
       element = (

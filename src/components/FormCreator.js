@@ -1,6 +1,7 @@
 import React from "react";
 import Text from "./UI/Text";
 import DropDown from "./UI/DropDown";
+import { Consumer } from "./../App";
 
 const types = ["text", "dropDown", "textarea"];
 const styles = {
@@ -13,18 +14,24 @@ const styles = {
 const FormCreator = props => {
   return (
     <div>
-      <Text
-        field={props.field}
-        placeholder="Type here.."
-        styles={styles}
-        changed={props.changed}
-      ></Text>
-      <DropDown
-        elements={types}
-        styles={styles}
-        selection={props.selection}
-        changed={event => props.changeSelection(event)}
-      ></DropDown>
+      <Consumer>
+        {context => (
+          <>
+            <Text
+              field={context.state}
+              placeholder="Type here.."
+              styles={styles}
+              changed={props.changed}
+            ></Text>
+            <DropDown
+              elements={types}
+              styles={styles}
+              selection={props.selection}
+              changed={event => props.changeSelection(event)}
+            ></DropDown>
+          </>
+        )}
+      </Consumer>
     </div>
   );
 };
