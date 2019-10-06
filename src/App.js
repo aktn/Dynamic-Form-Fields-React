@@ -1,38 +1,20 @@
 import React, { Component, createContext } from "react";
 import FormCreator from "./components/FormCreator";
 import DisplayForm from "./components/DisplayForm";
-
-const temp = [
-  {
-    question: "Question 1",
-    type: "dropDown"
-  },
-  {
-    question: "Question 2",
-    type: "text"
-  },
-  {
-    question: "Question 3",
-    type: "checkBox"
-  },
-  {
-    question: "Question 4",
-    type: "checkBox"
-  }
-];
+import temp from "./data.json";
 
 export const { Provider, Consumer } = createContext();
 
 class App extends Component {
   state = {
     questions: temp,
-    field: "dd",
+    field: "",
     type: "text"
   };
 
   handleFieldChange = value => {
     this.setState({ field: value });
-    this.addQuestions(value);
+    // this.addQuestions(value);
   };
 
   addQuestions = data => {
@@ -55,7 +37,8 @@ class App extends Component {
       <div className="App">
         <Provider
           value={{
-            state: field
+            state: field,
+            updateField: this.handleFieldChange
           }}
         >
           <FormCreator

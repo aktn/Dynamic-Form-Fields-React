@@ -22,6 +22,7 @@ const FormCreator = props => {
               placeholder="Type here.."
               styles={styles}
               changed={props.changed}
+              updateField={context.updateField}
             ></Text>
             <DropDown
               elements={types}
