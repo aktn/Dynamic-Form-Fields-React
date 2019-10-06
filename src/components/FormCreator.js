@@ -45,7 +45,7 @@ const FormCreator = props => {
               field={context.state}
               placeholder="Type here.."
               styles={textFieldStyles}
-              changed={props.changed}
+              onEnter={context.onEnter}
               updateField={context.updateField}
               placeholder="Enter field name"
             ></Text>

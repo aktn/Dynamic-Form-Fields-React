@@ -19,12 +19,9 @@ const Input = styled.input`
 const Text = props => {
   const onEnter = event => {
     if (event.keyCode === 13) {
-      props.changed(event.target.value);
+      props.onEnter(event.target.value);
+      console.log(event.target.value);
     }
-  };
-
-  const handleUpdateField = e => {
-    props.updateField(e.target.value);
   };
 
   return (
@@ -33,7 +30,7 @@ const Text = props => {
       type="text"
       value={props.field}
       onKeyDown={onEnter}
-      onChange={handleUpdateField}
+      onChange={e => props.updateField(e.target.value)}
       {...props}
     />
   );

@@ -21,7 +21,6 @@ class App extends Component {
 
   handleFieldChange = value => {
     this.setState({ field: value });
-    // this.addQuestions(value);
   };
 
   addQuestions = data => {
@@ -45,12 +44,11 @@ class App extends Component {
         <Provider
           value={{
             state: field,
-            updateField: this.handleFieldChange
+            updateField: this.handleFieldChange,
+            onEnter: this.addQuestions
           }}
         >
           <FormCreator
-            value={field}
-            changed={this.handleFieldChange}
             selection={type}
             changeSelection={this.handleSelectChange}
           ></FormCreator>
