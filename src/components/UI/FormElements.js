@@ -7,8 +7,8 @@ const FormElements = props => {
   let element = [];
   const types = ["text", "select", "textarea"];
   const styles = {
-    width: "50%",
-    height: "35px",
+    width: "100%",
+    height: "45px",
     background: "transparent",
     color: "gray"
   };

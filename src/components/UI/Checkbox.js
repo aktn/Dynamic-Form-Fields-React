@@ -7,14 +7,16 @@ const CheckBox = props => {
     display: block;
     margin: 10px 0;
     position: relative;
+    font-size: 18px;
+    font-family: "Cutive Mono", serif;
   `;
 
   const Title = styled.label`
-    padding: 25px 5px;
-    width: 50%;
+    padding: 25px 0px 0px;
+    width: 100%;
     display: block;
     text-align: left;
-    color: #3c454c;
+    color: gray;
     cursor: pointer;
     position: relative;
     z-index: 2;
@@ -58,8 +60,10 @@ const CheckBox = props => {
     right: 30px;
     visibility: hidden;
     transform: translateY(-50%);
+
     &:checked ~ label {
       color: #fff;
+
       &:before {
         opacity: 1;
         transform: translate(-50%, -50%) scale3d(76, 66, 1);

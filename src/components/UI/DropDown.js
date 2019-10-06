@@ -7,8 +7,9 @@ const DropDown = props => {
     height: ${props.styles.height};
     background: ${props.styles.background};
     color: ${props.styles.color};
-    padding-left: 5px;
-    font-size: 14px;
+    margin-top: 25px;
+    padding: 10px 5px;
+    font-size: 18px;
     border: 1px solid #fff;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -16,6 +17,11 @@ const DropDown = props => {
     background-repeat: no-repeat;
     background-image: url("http://cdn.onlinewebfonts.com/svg/img_295694.svg");
     background-size: 10px;
+    border-color: ${props.styles.borderColor
+      ? props.styles.borderColor
+      : "#d1d7dc;"};
+    outline: none;
+    font-family: "Cutive Mono", serif;
   `;
 
   return (

@@ -5,12 +5,15 @@ const Input = styled.input`
   width: ${props => props.styles.width};
   height: ${props => props.styles.height};
   background: ${props => props.styles.background};
+  padding: 25px 5px 10px 5px;
   color: ${props => props.color};
-  padding-left: 5px;
-  font-size: 14px;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: ${props =>
+    props.styles.borderColor ? props.styles.borderColor : "#d1d7dc;"};
   outline: none;
+  font-size: 18px;
+  font-family: "Cutive Mono", serif;
 `;
 
 const Text = props => {

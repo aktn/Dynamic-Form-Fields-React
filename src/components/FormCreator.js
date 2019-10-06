@@ -2,38 +2,57 @@ import React from "react";
 import Text from "./UI/Text";
 import DropDown from "./UI/DropDown";
 import { Consumer } from "./../App";
+import styled from "styled-components";
 
 const types = ["text", "dropDown", "textarea"];
-const styles = {
-  width: "50%",
+const dropDownStyles = {
+  width: "20%",
+  height: "45px",
+  background: "transparent",
+  color: "gray",
+  borderColor: "#544d48"
+};
+
+const textFieldStyles = {
+  width: "65%",
   height: "35px",
   background: "transparent",
-  color: "gray"
+  color: "gray",
+  borderColor: "#544d48"
 };
+
+const Wrapper = styled.div`
+  flex: 1;
+  background-color: #ffeae4;
+  padding: 10px;
+  justify-content: space-evenly;
+  display: flex;
+`;
 
 const FormCreator = props => {
   return (
-    <div>
+    <Wrapper>
       <Consumer>
         {context => (
           <>
-            <Text
-              field={context.state}
-              placeholder="Type here.."
-              styles={styles}
-              changed={props.changed}
-              updateField={context.updateField}
-            ></Text>
             <DropDown
               elements={types}
-              styles={styles}
+              styles={dropDownStyles}
               selection={props.selection}
               changed={event => props.changeSelection(event)}
             ></DropDown>
+            <Text
+              field={context.state}
+              placeholder="Type here.."
+              styles={textFieldStyles}
+              changed={props.changed}
+              updateField={context.updateField}
+              placeholder="Enter field name"
+            ></Text>
           </>
         )}
       </Consumer>
-    </div>
+    </Wrapper>
   );
 };
 

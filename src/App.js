@@ -2,8 +2,15 @@ import React, { Component, createContext } from "react";
 import FormCreator from "./components/FormCreator";
 import DisplayForm from "./components/DisplayForm";
 import temp from "./data.json";
+import styled from "styled-components";
 
 export const { Provider, Consumer } = createContext();
+
+const Container = styled.div`
+  display: flex;
+  width: 100vw;
+  font-family: "Cutive Mono", serif;
+`;
 
 class App extends Component {
   state = {
@@ -34,7 +41,7 @@ class App extends Component {
     const { field, type } = this.state;
 
     return (
-      <div className="App">
+      <Container>
         <Provider
           value={{
             state: field,
@@ -54,7 +61,7 @@ class App extends Component {
             changed={this.handleTypeChange}
           ></DisplayForm>
         </Provider>
-      </div>
+      </Container>
     );
   }
 }
