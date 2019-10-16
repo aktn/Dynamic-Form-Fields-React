@@ -22,7 +22,7 @@ const Label = styled.label`
 const DisplayForm = props => {
   const items = props.items.map((item, i) => {
     return (
-      <Item>
+      <Item key={i}>
         <Label>{item.question}</Label>
         <FormElements element={item}></FormElements>
       </Item>

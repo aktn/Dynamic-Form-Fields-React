@@ -9,10 +9,10 @@
   },
   {
     "question": "Question 3",
-    "type": "checkBox"
-  },
-  {
-    "question": "Question 4",
-    "type": "checkBox"
+    "type": "checkBox",
+    "options": [
+      { "value": "option1", "display": "First Option" },
+      { "value": "option2", "display": "Second Option" }
+    ]
   }
 ]

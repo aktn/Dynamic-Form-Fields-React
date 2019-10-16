@@ -35,7 +35,7 @@ const FormElements = props => {
       );
       break;
     case "checkBox":
-      element = <CheckBox></CheckBox>;
+      element = <CheckBox options={props.element.options}></CheckBox>;
       break;
   }
 

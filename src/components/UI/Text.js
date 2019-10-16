@@ -20,7 +20,6 @@ const Text = props => {
   const onEnter = event => {
     if (event.keyCode === 13) {
       props.onEnter(event.target.value);
-      console.log(event.target.value);
     }
   };
 

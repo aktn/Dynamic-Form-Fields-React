@@ -3,6 +3,7 @@ import FormCreator from "./components/FormCreator";
 import DisplayForm from "./components/DisplayForm";
 import temp from "./data.json";
 import styled from "styled-components";
+import EditForm from "./components/EditForm";
 
 export const { Provider, Consumer } = createContext();
 
@@ -19,6 +20,12 @@ class App extends Component {
     type: "text"
   };
 
+  componentDidMount() {
+    this.setState({
+      questions: [{ id: "1", question: "", type: "dropDown" }]
+    });
+  }
+
   handleFieldChange = value => {
     this.setState({ field: value });
   };
@@ -27,7 +34,8 @@ class App extends Component {
     const type = this.state.type;
     const item = { question: data, type: type };
     this.setState(prevState => ({
-      questions: [...prevState.questions, item]
+      questions: [...prevState.questions, item],
+      field: ""
     }));
   };
 
@@ -36,8 +44,30 @@ class App extends Component {
     this.setState({ type: value });
   };
 
+  updateSelection = (e, id) => {
+    const { questions } = this.state;
+    const itemIndex = questions.findIndex(item => item.id === id);
+    const value = e.target.value;
+
+    console.log(e.target.value, id);
+
+    const updatedSelection = {
+      ...questions[itemIndex],
+      type: value
+    };
+
+    this.setState({
+      questions: [
+        ...questions.slice(0, itemIndex),
+        updatedSelection,
+        ...questions.slice(itemIndex + 1)
+      ]
+    });
+  };
+
   render() {
     const { field, type } = this.state;
+    console.log(this.state.questions);
 
     return (
       <Container>
@@ -48,10 +78,15 @@ class App extends Component {
             onEnter: this.addQuestions
           }}
         >
-          <FormCreator
+          {/* <FormCreator
             selection={type}
             changeSelection={this.handleSelectChange}
-          ></FormCreator>
+          ></FormCreator> */}
+          <EditForm
+            value={type}
+            items={this.state.questions}
+            changeSelection={this.updateSelection}
+          ></EditForm>
 
           <DisplayForm
             value={type}
