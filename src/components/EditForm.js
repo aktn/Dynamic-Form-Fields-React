@@ -34,16 +34,18 @@ const dropDownStyles = {
 const types = ["text", "dropDown", "textarea"];
 
 const EditForm = props => {
-  console.log(props.items);
   const items = props.items.map((item, i) => {
     return (
       <Item key={i}>
         <Text
           styles={textFieldStyles}
+          field={item.question}
           placeholder={item.question}
           selection={props.selection}
-          changed={event => props.changeSelection(event)}
+          updateField={event => props.changeLabelField(event, item.id)}
+          onEnter={props.onEnter}
         ></Text>
+
         <DropDown
           elements={types}
           styles={dropDownStyles}

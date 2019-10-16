@@ -39,17 +39,15 @@ class App extends Component {
     }));
   };
 
-  handleSelectChange = e => {
-    const value = e.target.value;
-    this.setState({ type: value });
-  };
+  // handleSelectChange = e => {
+  //   const value = e.target.value;
+  //   this.setState({ type: value });
+  // };
 
-  updateSelection = (e, id) => {
+  updateSelectionType = (e, id) => {
     const { questions } = this.state;
     const itemIndex = questions.findIndex(item => item.id === id);
     const value = e.target.value;
-
-    console.log(e.target.value, id);
 
     const updatedSelection = {
       ...questions[itemIndex],
@@ -65,9 +63,28 @@ class App extends Component {
     });
   };
 
+  updateLabelField = (e, id) => {
+    console.log(e);
+    const { questions } = this.state;
+    const itemIndex = questions.findIndex(item => item.id === id);
+    const value = e;
+
+    const updatedSelection = {
+      ...questions[itemIndex],
+      question: value
+    };
+
+    this.setState({
+      questions: [
+        ...questions.slice(0, itemIndex),
+        updatedSelection,
+        ...questions.slice(itemIndex + 1)
+      ]
+    });
+  };
+
   render() {
     const { field, type } = this.state;
-    console.log(this.state.questions);
 
     return (
       <Container>
@@ -85,7 +102,9 @@ class App extends Component {
           <EditForm
             value={type}
             items={this.state.questions}
-            changeSelection={this.updateSelection}
+            changeSelection={this.updateSelectionType}
+            changeLabelField={this.updateLabelField}
+            onEnter={this.addQuestions}
           ></EditForm>
 
           <DisplayForm
