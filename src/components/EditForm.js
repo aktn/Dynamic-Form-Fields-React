@@ -24,6 +24,15 @@ const textFieldStyles = {
   borderColor: "#544d48"
 };
 
+const miniTextFieldStyles = {
+  width: "50%",
+  height: "35px",
+  background: "transparent",
+  color: "gray",
+  borderColor: "#544d48",
+  display: "block"
+};
+
 const dropDownStyles = {
   width: "20%",
   height: "45px",
@@ -31,7 +40,21 @@ const dropDownStyles = {
   color: "gray",
   borderColor: "#544d48"
 };
-const types = ["text", "dropDown", "textarea"];
+
+const CreateSelectOptions = styled.div`
+  padding: 2% 29%;
+`;
+
+const Button = styled.button`
+  border-radius: 50%;
+  font-size: 18px;
+  text-align: center;
+  border-color: #232323;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
+const types = ["text", "dropDown", "checkBox"];
 
 const EditForm = props => {
   const items = props.items.map((item, i) => {
@@ -41,7 +64,7 @@ const EditForm = props => {
           styles={textFieldStyles}
           field={item.question}
           placeholder={item.question}
-          selection={props.selection}
+          selection={item.type}
           updateField={event => props.changeLabelField(event, item.id)}
           onEnter={props.onEnter}
         ></Text>
@@ -52,6 +75,21 @@ const EditForm = props => {
           selection={item.type}
           changed={event => props.changeSelection(event, item.id)}
         ></DropDown>
+
+        {item.type === "dropDown" ? (
+          <CreateSelectOptions>
+            <Text
+              placeholder="Type here.."
+              styles={miniTextFieldStyles}
+              placeholder="Add options"
+              updateField={event => props.changeOptionField(event, item.id)}
+              onEnter={props.createOptions}
+            ></Text>
+            <Button>+</Button>
+          </CreateSelectOptions>
+        ) : (
+          ""
+        )}
       </Item>
     );
   });

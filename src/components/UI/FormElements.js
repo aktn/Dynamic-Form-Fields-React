@@ -5,13 +5,15 @@ import CheckBox from "./Checkbox";
 
 const FormElements = props => {
   let element = [];
-  const types = ["text", "select", "textarea"];
+  const types = ["text", "dropDown", "checkBox"];
   const styles = {
     width: "100%",
     height: "45px",
     background: "transparent",
     color: "gray"
   };
+
+  const options = props.element.options ? [props.element.options] : [];
 
   switch (props.element.type) {
     case "text":
@@ -27,7 +29,7 @@ const FormElements = props => {
     case "dropDown":
       element = (
         <DropDown
-          elements={types}
+          elements={options}
           selection={props.selection}
           styles={styles}
           changed={event => props.changeSelection(event)}

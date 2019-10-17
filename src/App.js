@@ -1,5 +1,4 @@
 import React, { Component, createContext } from "react";
-import FormCreator from "./components/FormCreator";
 import DisplayForm from "./components/DisplayForm";
 import temp from "./data.json";
 import styled from "styled-components";
@@ -16,29 +15,26 @@ const Container = styled.div`
 class App extends Component {
   state = {
     questions: temp,
-    field: "",
-    type: "text"
+    id: 1
   };
 
   componentDidMount() {
     this.setState({
-      questions: [{ id: "1", question: "", type: "dropDown" }]
+      questions: [{ id: 1, question: "", type: "text", options: [] }]
     });
   }
 
-  handleFieldChange = value => {
-    this.setState({ field: value });
-  };
-
   addQuestions = data => {
-    const type = this.state.type;
-    const item = { question: data, type: type };
+    const { id } = this.state;
+    const item = { id: id + 1, question: "", type: "text" };
     this.setState(prevState => ({
-      questions: [...prevState.questions, item],
-      field: ""
+      questions: [...prevState.questions, item]
     }));
   };
 
+  // handleFieldChange = value => {
+  //   this.setState({ field: value });
+  // };
   // handleSelectChange = e => {
   //   const value = e.target.value;
   //   this.setState({ type: value });
@@ -48,44 +44,52 @@ class App extends Component {
     const { questions } = this.state;
     const itemIndex = questions.findIndex(item => item.id === id);
     const value = e.target.value;
-
-    const updatedSelection = {
+    const updatedObject = {
       ...questions[itemIndex],
       type: value
     };
+    this.updateState(updatedObject, itemIndex);
+  };
 
+  updateLabelField = (value, id) => {
+    const { questions } = this.state;
+    const itemIndex = questions.findIndex(item => item.id === id);
+    const updatedObject = {
+      ...questions[itemIndex],
+      question: value
+    };
+    this.updateState(updatedObject, itemIndex);
+  };
+
+  updateState = (updatedObject, itemIndex) => {
+    const { questions } = this.state;
     this.setState({
       questions: [
         ...questions.slice(0, itemIndex),
-        updatedSelection,
+        updatedObject,
         ...questions.slice(itemIndex + 1)
       ]
     });
   };
 
-  updateLabelField = (e, id) => {
-    console.log(e);
+  createOptionsForField = data => {
+    console.log(data);
+  };
+
+  changeOptionField = (value, id) => {
     const { questions } = this.state;
     const itemIndex = questions.findIndex(item => item.id === id);
-    const value = e;
 
-    const updatedSelection = {
+    const updatedObject = {
       ...questions[itemIndex],
-      question: value
+      options: [value]
     };
-
-    this.setState({
-      questions: [
-        ...questions.slice(0, itemIndex),
-        updatedSelection,
-        ...questions.slice(itemIndex + 1)
-      ]
-    });
+    this.updateState(updatedObject, itemIndex);
   };
 
   render() {
     const { field, type } = this.state;
-
+    console.log(this.state.questions);
     return (
       <Container>
         <Provider
@@ -105,6 +109,8 @@ class App extends Component {
             changeSelection={this.updateSelectionType}
             changeLabelField={this.updateLabelField}
             onEnter={this.addQuestions}
+            createOptions={this.createOptionsForField}
+            changeOptionField={this.changeOptionField}
           ></EditForm>
 
           <DisplayForm
