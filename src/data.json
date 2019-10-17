@@ -10,9 +10,6 @@
   {
     "question": "Question 3",
     "type": "checkBox",
-    "options": [
-      { "value": "option1", "display": "First Option" },
-      { "value": "option2", "display": "Second Option" }
-    ]
+    "options": ["One", "Two"]
   }
 ]

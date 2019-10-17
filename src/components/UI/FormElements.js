@@ -5,7 +5,7 @@ import CheckBox from "./Checkbox";
 
 const FormElements = props => {
   let element = [];
-  const types = ["text", "dropDown", "checkBox"];
+
   const styles = {
     width: "100%",
     height: "45px",

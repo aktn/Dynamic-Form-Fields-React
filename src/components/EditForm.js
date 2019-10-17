@@ -76,7 +76,7 @@ const EditForm = props => {
           changed={event => props.changeSelection(event, item.id)}
         ></DropDown>
 
-        {item.type === "dropDown" ? (
+        {item.type === "checkBox" || item.type === "dropDown" ? (
           <CreateSelectOptions>
             <Text
               placeholder="Type here.."
