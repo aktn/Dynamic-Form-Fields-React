@@ -13,7 +13,7 @@ const FormElements = props => {
     color: "gray"
   };
 
-  const options = props.element.options ? [props.element.options] : [];
+  const options = props.element.options ? props.element.options : [];
 
   switch (props.element.type) {
     case "text":
@@ -32,7 +32,7 @@ const FormElements = props => {
           elements={options}
           selection={props.selection}
           styles={styles}
-          changed={event => props.changeSelection(event)}
+          changed={event => props.changeSelection(event, element.id)}
         ></DropDown>
       );
       break;

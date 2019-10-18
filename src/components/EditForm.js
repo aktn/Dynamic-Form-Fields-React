@@ -1,5 +1,4 @@
 import React from "react";
-import FormElements from "./UI/FormElements";
 import styled from "styled-components";
 import Text from "./UI/Text";
 import DropDown from "./UI/DropDown";
@@ -45,15 +44,6 @@ const CreateSelectOptions = styled.div`
   padding: 2% 29%;
 `;
 
-const Button = styled.button`
-  border-radius: 50%;
-  font-size: 18px;
-  text-align: center;
-  border-color: #232323;
-  background-color: transparent;
-  cursor: pointer;
-`;
-
 const types = ["text", "dropDown", "checkBox"];
 
 const EditForm = props => {
@@ -82,14 +72,26 @@ const EditForm = props => {
               placeholder="Type here.."
               styles={miniTextFieldStyles}
               placeholder="Add options"
-              updateField={event => props.changeOptionField(event, item.id)}
-              onEnter={props.createOptions}
+              updateField={event => ""}
+              onEnter={event => props.createOptions(event, item.id)}
             ></Text>
-            <Button>+</Button>
           </CreateSelectOptions>
         ) : (
           ""
         )}
+
+        {item.options &&
+          item.options.map((option, i) => (
+            <CreateSelectOptions key={i}>
+              <Text
+                placeholder="Type here.."
+                styles={miniTextFieldStyles}
+                placeholder="Add options"
+                updateField={event => ""}
+                onEnter={event => props.createOptions(event, item.id)}
+              ></Text>
+            </CreateSelectOptions>
+          ))}
       </Item>
     );
   });

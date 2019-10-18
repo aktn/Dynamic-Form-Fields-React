@@ -19,12 +19,18 @@ const Label = styled.label`
   font-size: 20px;
 `;
 
+// Just to demonstrate the change on view
+const changeSelectionType = () => {};
+
 const DisplayForm = props => {
   const items = props.items.map((item, i) => {
     return (
       <Item key={i}>
         <Label>{item.question}</Label>
-        <FormElements element={item}></FormElements>
+        <FormElements
+          element={item}
+          changeSelection={changeSelectionType}
+        ></FormElements>
       </Item>
     );
   });
