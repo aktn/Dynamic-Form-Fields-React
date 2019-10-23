@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   flex: 1;
   border-left: 1px solid #fff;
   min-height: 100vh;
-  background-color: #f8f8f8;
+  background-color: #454a49;
 `;
 
 const Item = styled.div`
@@ -19,6 +19,12 @@ const Label = styled.label`
   font-size: 20px;
 `;
 
+const Index = styled.span`
+  padding-right: 10px;
+  font-size: 20px;
+  color: gray;
+`;
+
 // Just to demonstrate the change on view
 const changeSelectionType = () => {};
 
@@ -26,6 +32,7 @@ const DisplayForm = props => {
   const items = props.items.map((item, i) => {
     return (
       <Item key={i}>
+        <Index>{item.id}.</Index>
         <Label>{item.question}</Label>
         <FormElements
           element={item}

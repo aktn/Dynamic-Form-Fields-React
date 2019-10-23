@@ -23,6 +23,7 @@ const FormElements = props => {
           placeholder="Type here.."
           styles={styles}
           changed={props.changed}
+          updateField={event => console.log(event)}
         ></Text>
       );
       break;

@@ -33,38 +33,47 @@ const miniTextFieldStyles = {
 };
 
 const dropDownStyles = {
-  width: "20%",
-  height: "45px",
+  width: "15%",
+  height: "35px",
   background: "transparent",
   color: "gray",
-  borderColor: "#544d48"
+  borderColor: "#544d48",
+  fontSize: "12px"
 };
 
 const CreateSelectOptions = styled.div`
-  padding: 2% 29%;
+  padding: 2% 27%;
 `;
 
 const types = ["text", "dropDown", "checkBox"];
+
+const Test = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: space-evenly;
+  width: 100%;
+`;
 
 const EditForm = props => {
   const items = props.items.map((item, i) => {
     return (
       <Item key={i}>
-        <Text
-          styles={textFieldStyles}
-          field={item.question}
-          placeholder={item.question}
-          selection={item.type}
-          updateField={event => props.changeLabelField(event, item.id)}
-          onEnter={props.onEnter}
-        ></Text>
-
-        <DropDown
-          elements={types}
-          styles={dropDownStyles}
-          selection={item.type}
-          changed={event => props.changeSelection(event, item.id)}
-        ></DropDown>
+        <Test>
+          <DropDown
+            elements={types}
+            styles={dropDownStyles}
+            selection={item.type}
+            changed={event => props.changeSelection(event, item.id)}
+          ></DropDown>
+          <Text
+            styles={textFieldStyles}
+            field={item.question}
+            placeholder={item.question}
+            selection={item.type}
+            updateField={event => props.changeLabelField(event, item.id)}
+            onEnterField={props.onEnter}
+          ></Text>
+        </Test>
 
         {item.type === "checkBox" || item.type === "dropDown" ? (
           <CreateSelectOptions>
@@ -72,8 +81,8 @@ const EditForm = props => {
               placeholder="Type here.."
               styles={miniTextFieldStyles}
               placeholder="Add options"
-              updateField={event => ""}
-              onEnter={event => props.createOptions(event, item.id)}
+              updateField={event => console.log(event)}
+              onEnterField={event => props.createOptions(event, item.id)}
             ></Text>
           </CreateSelectOptions>
         ) : (
@@ -88,7 +97,7 @@ const EditForm = props => {
                 styles={miniTextFieldStyles}
                 placeholder="Add options"
                 updateField={event => ""}
-                onEnter={event => props.createOptions(event, item.id)}
+                onEnterField={event => props.createOptions(event, item.id)}
               ></Text>
             </CreateSelectOptions>
           ))}

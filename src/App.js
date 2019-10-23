@@ -22,7 +22,7 @@ class App extends Component {
     });
   }
 
-  addQuestions = data => {
+  addQuestions = () => {
     const { id } = this.state;
 
     const item = { id: id + 1, question: "", type: "text", options: [] };

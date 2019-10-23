@@ -9,7 +9,7 @@ const DropDown = props => {
     color: ${props.styles.color};
     margin-top: 25px;
     padding: 10px 5px;
-    font-size: 18px;
+    font-size: ${props.styles.fontSize ? props.styles.fontSize : "16px"};
     border: 1px solid #fff;
     -webkit-appearance: none;
     -moz-appearance: none;
