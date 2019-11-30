@@ -77,10 +77,10 @@ const Input = styled.input`
 `;
 
 const CheckBox = props => {
-  const options = props.options.map((option, i) => (
+  const options = props.options.map((item, i) => (
     <Wrapper key={i}>
-      <Input id={option.index} name={option.option} type="checkbox" />
-      <Title htmlFor={option.option}>{option.option}</Title>
+      <Input id={item.index} name={item.option} type="checkbox" />
+      <Title htmlFor={item.option}>{item.option}</Title>
     </Wrapper>
   ));
   return <>{options}</>;

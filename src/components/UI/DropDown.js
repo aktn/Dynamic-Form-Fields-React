@@ -26,9 +26,9 @@ const DropDown = props => {
 
   return (
     <Select value={props.selection} onChange={props.changed}>
-      {props.elements.map(option => (
-        <option key={option} value={option}>
-          {option}
+      {props.elements.map(element => (
+        <option key={element.value} value={element.value}>
+          {element.display}
         </option>
       ))}
     </Select>

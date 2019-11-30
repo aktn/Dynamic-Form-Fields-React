@@ -52,7 +52,12 @@ const Test = styled.div`
   width: 100%;
 `;
 
-const types = ["text", "dropDown", "checkBox", "textarea"];
+const types = [
+  { value: "text", display: "Text" },
+  { value: "dropDown", display: "Dropdown List" },
+  { value: "checkBox", display: "Checkbox" },
+  { value: "textarea", display: "Textarea" }
+];
 
 const EditForm = props => {
   const handleSelection = (event, id) => {

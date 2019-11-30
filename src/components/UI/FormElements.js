@@ -23,7 +23,7 @@ const FormElements = props => {
           field={props.field}
           placeholder="Type here.."
           styles={styles}
-          handleChange={props.changed}
+          handleChange={() => {}}
           updateField={event => console.log(event)}
           showMessage={false}
         ></Text>
