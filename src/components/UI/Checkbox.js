@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.label`
-  padding: 20px 0px;
+  padding: 20px 10px;
   width: 100%;
   display: block;
   text-align: left;
@@ -79,8 +79,8 @@ const Input = styled.input`
 const CheckBox = props => {
   const options = props.options.map((option, i) => (
     <Wrapper key={i}>
-      <Input id={option} name={option} type="checkbox" />
-      <Title htmlFor={option}>{option}</Title>
+      <Input id={option.index} name={option.option} type="checkbox" />
+      <Title htmlFor={option.option}>{option.option}</Title>
     </Wrapper>
   ));
   return <>{options}</>;

@@ -63,7 +63,6 @@ const FormCreator = props => {
         <Text
           placeholder="Type here.."
           styles={miniTextFieldStyles}
-          placeholder="Add options"
         ></Text>
         <Button>+</Button>
       </CreateSelectOptions>

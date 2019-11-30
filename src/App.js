@@ -17,14 +17,19 @@ class App extends Component {
 
   componentDidMount() {
     const { id } = this.state;
+
+    //Load the initial data after being mounted
     this.setState({
       questions: [{ id: id, question: "", type: "text", options: [] }]
     });
   }
 
+  /*
+   * Return an empty field with a unique ID
+   * @param {} - create a new question field
+   */
   addQuestions = () => {
     const { id } = this.state;
-
     const item = { id: id + 1, question: "", type: "text", options: [] };
     this.setState(prevState => ({
       questions: [...prevState.questions, item],
@@ -32,6 +37,7 @@ class App extends Component {
     }));
   };
 
+  // invoke when dropdown selection changes
   updateSelectionType = (e, id) => {
     const { questions } = this.state;
     const itemIndex = questions.findIndex(item => item.id === id);
@@ -40,10 +46,26 @@ class App extends Component {
       ...questions[itemIndex],
       type: value
     };
-    this.updateState(updatedObject, itemIndex);
+
+    this.setState(
+      {
+        questions: [
+          ...questions.slice(0, itemIndex),
+          updatedObject,
+          ...questions.slice(itemIndex + 1)
+        ]
+      },
+      function() {
+        // Add a new field after it has been selected
+        this.createOptionsForField("", id);
+      }
+    );
   };
 
-  updateLabelField = (value, id) => {
+  /*
+   * @param {string, number} value, id - Updating a label
+   */
+  updateLabel = (value, id) => {
     const { questions } = this.state;
     const itemIndex = questions.findIndex(item => item.id === id);
     const updatedObject = {
@@ -53,6 +75,9 @@ class App extends Component {
     this.updateState(updatedObject, itemIndex);
   };
 
+  /*
+   * @param {Object, number} value, question's index - Updating object state to be reusable
+   */
   updateState = (updatedObject, itemIndex) => {
     const { questions } = this.state;
     this.setState({
@@ -64,33 +89,56 @@ class App extends Component {
     });
   };
 
-  createOptionsForField = (data, id) => {
+  /*
+   * @param {string, number, number} option, id, index - Updating a label
+   */
+  createOptionsForField = (option, id, index) => {
     const { questions } = this.state;
     const itemIndex = questions.findIndex(item => item.id === id);
 
-    const updatedObject = {
-      ...questions[itemIndex],
-      options: [...questions[itemIndex].options, data]
-    };
-    this.updateState(updatedObject, itemIndex);
+    let options = questions[itemIndex].options;
+    const optionList = options.map(option => option.index);
+
+    // Update state if record already exists or else create a new one
+    if (optionList.includes(index)) {
+      const updatedObject = {
+        ...questions[itemIndex],
+        options: options.map(item =>
+          item.index === index
+            ? {
+                ...item,
+                option
+              }
+            : item
+        )
+      };
+      this.updateState(updatedObject, itemIndex);
+    } else {
+      const data = { option, index };
+      const updatedObject = {
+        ...questions[itemIndex],
+        options: [...questions[itemIndex].options, data]
+      };
+      this.updateState(updatedObject, itemIndex);
+    }
   };
 
   render() {
-    const { type } = this.state;
+    const { type, questions } = this.state;
 
     return (
       <Container>
         <EditForm
           value={type}
-          items={this.state.questions}
+          items={questions}
           changeSelection={this.updateSelectionType}
-          changeLabelField={this.updateLabelField}
+          changeLabelField={this.updateLabel}
           onEnter={this.addQuestions}
           createOptions={this.createOptionsForField}
         ></EditForm>
         <DisplayForm
           value={type}
-          items={this.state.questions}
+          items={questions}
           changed={this.handleTypeChange}
         ></DisplayForm>
       </Container>

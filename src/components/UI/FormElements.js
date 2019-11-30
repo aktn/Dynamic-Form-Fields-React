@@ -2,6 +2,7 @@ import React from "react";
 import Text from "./Text";
 import DropDown from "./DropDown";
 import CheckBox from "./Checkbox";
+import Textarea from "./Textarea";
 
 const FormElements = props => {
   let element = [];
@@ -22,8 +23,9 @@ const FormElements = props => {
           field={props.field}
           placeholder="Type here.."
           styles={styles}
-          changed={props.changed}
+          handleChange={props.changed}
           updateField={event => console.log(event)}
+          showMessage={false}
         ></Text>
       );
       break;
@@ -40,6 +42,20 @@ const FormElements = props => {
     case "checkBox":
       element = <CheckBox options={props.element.options}></CheckBox>;
       break;
+    case "textarea":
+      element = <Textarea></Textarea>;
+      break;
+    default:
+      element = (
+        <Text
+          field={props.field}
+          placeholder="Type here.."
+          styles={styles}
+          handleChange={props.changed}
+          updateField={event => console.log(event)}
+          showMessage={false}
+        ></Text>
+      );
   }
 
   return <div>{element}</div>;

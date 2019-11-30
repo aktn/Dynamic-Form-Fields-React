@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Label = styled.label`
-  background-color: transparent;
   position: absolute;
   margin-top: 2%;
   margin-left: 10%;
@@ -24,7 +23,7 @@ const Input = styled.input`
   font-size: 18px;
   font-family: "Cutive Mono", serif;
   &:focus ~ ${Label} {
-    visibility: visible;
+    visibility: ${props => (props.showMessage ? "visible" : "hidden")};
     font-size: 11px;
   }
 `;
@@ -43,7 +42,8 @@ const Text = props => {
         type="text"
         value={props.field}
         onKeyDown={onEnter}
-        onChange={e => props.updateField(e.target.value)}
+        onChange={e => props.handleChange(e.target.value)}
+        showMessage={props.showMessage}
         {...props}
       />
       <Label>Enter to save</Label>

@@ -45,8 +45,6 @@ const CreateSelectOptions = styled.div`
   padding: 2% 27%;
 `;
 
-const types = ["text", "dropDown", "checkBox"];
-
 const Test = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -54,8 +52,25 @@ const Test = styled.div`
   width: 100%;
 `;
 
+const types = ["text", "dropDown", "checkBox", "textarea"];
+
 const EditForm = props => {
+  const handleSelection = (event, id) => {
+    const type = event.target.value;
+    if (type === "checkBox") {
+      props.changeSelection(event, id);
+    } else if (type === "dropDown") {
+      props.changeSelection(event, id);
+    } else {
+      console.log("Oops... there was sth wrong");
+    }
+  };
+
   const items = props.items.map((item, i) => {
+    const checkDataExists = (event, id, index) => {
+      props.createOptions(event, id, index);
+    };
+
     return (
       <Item key={i}>
         <Test>
@@ -63,41 +78,29 @@ const EditForm = props => {
             elements={types}
             styles={dropDownStyles}
             selection={item.type}
-            changed={event => props.changeSelection(event, item.id)}
+            changed={event => handleSelection(event, item.id)}
           ></DropDown>
           <Text
             styles={textFieldStyles}
             field={item.question}
             placeholder={item.question}
             selection={item.type}
-            updateField={event => props.changeLabelField(event, item.id)}
+            handleChange={event => props.changeLabelField(event, item.id)}
             onEnterField={props.onEnter}
+            showMessage={true}
           ></Text>
         </Test>
 
-        {item.type === "checkBox" || item.type === "dropDown" ? (
-          <CreateSelectOptions>
-            <Text
-              placeholder="Type here.."
-              styles={miniTextFieldStyles}
-              placeholder="Add options"
-              updateField={event => console.log(event)}
-              onEnterField={event => props.createOptions(event, item.id)}
-            ></Text>
-          </CreateSelectOptions>
-        ) : (
-          ""
-        )}
-
         {item.options &&
-          item.options.map((option, i) => (
-            <CreateSelectOptions key={i}>
+          item.options.map((option, index) => (
+            <CreateSelectOptions key={index}>
               <Text
                 placeholder="Type here.."
                 styles={miniTextFieldStyles}
                 placeholder="Add options"
-                updateField={event => ""}
-                onEnterField={event => props.createOptions(event, item.id)}
+                handleChange={() => {}}
+                showMessage={true}
+                onEnterField={event => checkDataExists(event, item.id, index)}
               ></Text>
             </CreateSelectOptions>
           ))}

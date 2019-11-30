@@ -25,7 +25,7 @@ const Index = styled.span`
   color: gray;
 `;
 
-// Just to demonstrate the change on view
+// Currently just to demonstrate the change on view
 const changeSelectionType = () => {};
 
 const DisplayForm = props => {
