@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import DisplayForm from "./components/DisplayForm";
 import styled from "styled-components";
 import EditForm from "./components/EditForm";
-import { ChromePicker } from "react-color";
-import Button from "./components/UI/Button";
+import FormConfig from "./components/FormConfig";
 
 const Container = styled.div`
   display: flex;
@@ -12,36 +11,16 @@ const Container = styled.div`
   font-family: "Cutive Mono", serif;
 `;
 
-const FormConfig = styled.div`
-  display: flex;
-  flex: 1;
-  padding: 30px;
-`;
-
 const Wrapper = styled.div`
   display: flex;
   flex: 1;
 `;
-
-const popover = {
-  position: "absolute",
-  zIndex: "2"
-};
-
-const cover = {
-  position: "fixed",
-  top: "0px",
-  right: "0px",
-  bottom: "0px",
-  left: "0px"
-};
 
 class App extends Component {
   state = {
     questions: [],
     id: 1,
     configBar: false,
-    displayColorPicker: false,
     bgColor: "#454a49"
   };
 
@@ -159,14 +138,6 @@ class App extends Component {
     });
   };
 
-  handleClick = () => {
-    this.setState({ displayColorPicker: !this.state.displayColorPicker });
-  };
-
-  handleClose = () => {
-    this.setState({ displayColorPicker: false });
-  };
-
   changeBgColor = value => {
     this.setState({
       bgColor: value.hex
@@ -179,15 +150,7 @@ class App extends Component {
     return (
       <Container>
         {configBar ? (
-          <FormConfig>
-            <Button clicked={this.handleClick}>Change Bg Color</Button>
-            {this.state.displayColorPicker ? (
-              <div style={popover}>
-                <div style={cover} onClick={this.handleClose} />
-                <ChromePicker onChange={this.changeBgColor} />
-              </div>
-            ) : null}
-          </FormConfig>
+          <FormConfig emitColor={this.changeBgColor}></FormConfig>
         ) : (
           ""
         )}
