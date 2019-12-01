@@ -14,6 +14,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex: 1;
+  position: relative;
 `;
 
 class App extends Component {
@@ -155,6 +156,19 @@ class App extends Component {
           ""
         )}
         <Wrapper>
+          <i
+            className="fa fa-gear"
+            style={{
+              fontSize: "30px",
+              color: "#6e6959",
+              position: "absolute",
+              top: "25px",
+              left: "25px",
+              zIndex: "10",
+              cursor: "pointer"
+            }}
+            onClick={this.handleConfigBar}
+          ></i>
           <EditForm
             value={type}
             items={questions}
@@ -162,7 +176,6 @@ class App extends Component {
             changeLabelField={this.updateLabel}
             onEnter={this.addQuestions}
             createOptions={this.createOptionsForField}
-            toggleConfigBar={this.handleConfigBar}
           ></EditForm>
           <DisplayForm
             value={type}

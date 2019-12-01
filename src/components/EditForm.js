@@ -79,18 +79,6 @@ const EditForm = props => {
 
     return (
       <Item key={i}>
-        <i
-          className="fa fa-gear"
-          style={{
-            fontSize: "30px",
-            color: "#6e6959",
-            position: "absolute",
-            top: "-10px",
-            left: "-10px",
-            cursor: "pointer"
-          }}
-          onClick={props.toggleConfigBar}
-        ></i>
         <InputWrapper>
           <DropDown
             elements={types}

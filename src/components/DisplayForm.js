@@ -25,6 +25,12 @@ const Index = styled.span`
   color: gray;
 `;
 
+const Heading = styled.h3`
+  color: #fff;
+  font-weight: 400;
+  padding-left: 60px;
+`;
+
 // Currently just to demonstrate the change on view
 const changeSelectionType = () => {};
 
@@ -44,7 +50,12 @@ const DisplayForm = props => {
     );
   });
 
-  return <Wrapper bgColor={changeBgColor}>{items}</Wrapper>;
+  return (
+    <Wrapper bgColor={changeBgColor}>
+      <Heading>Form Preview</Heading>
+      {items}
+    </Wrapper>
+  );
 };
 
 export default DisplayForm;
