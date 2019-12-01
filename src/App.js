@@ -3,6 +3,7 @@ import DisplayForm from "./components/DisplayForm";
 import styled from "styled-components";
 import EditForm from "./components/EditForm";
 import { ChromePicker } from "react-color";
+import Button from "./components/UI/Button";
 
 const Container = styled.div`
   display: flex;
@@ -20,10 +21,6 @@ const FormConfig = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex: 1;
-`;
-
-const ChangeBgBtn = styled.button`
-  padding: 10px 15px;
 `;
 
 const popover = {
@@ -171,7 +168,6 @@ class App extends Component {
   };
 
   changeBgColor = value => {
-    console.log(value.hex);
     this.setState({
       bgColor: value.hex
     });
@@ -184,10 +180,7 @@ class App extends Component {
       <Container>
         {configBar ? (
           <FormConfig>
-            <ChangeBgBtn onClick={this.handleClick}>
-              Change Bg Color
-            </ChangeBgBtn>
-            {/* <button onClick={this.handleClick}>Pick Color</button> */}
+            <Button clicked={this.handleClick}>Change Bg Color</Button>
             {this.state.displayColorPicker ? (
               <div style={popover}>
                 <div style={cover} onClick={this.handleClose} />
