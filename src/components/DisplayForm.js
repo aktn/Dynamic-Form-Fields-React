@@ -37,6 +37,8 @@ const changeSelectionType = () => {};
 const DisplayForm = props => {
   const { changeBgColor } = props;
   const items = props.items.map((item, i) => {
+    if (item.question === "") return;
+
     return (
       <Item key={i}>
         <Index>{item.id}.</Index>

@@ -54,10 +54,10 @@ const InputWrapper = styled.div`
 `;
 
 const types = [
-  { value: "text", display: "Text" },
-  { value: "dropDown", display: "Dropdown List" },
-  { value: "checkBox", display: "Checkbox" },
-  { value: "textarea", display: "Textarea" }
+  { option: "text", display: "Text" },
+  { option: "dropDown", display: "Dropdown List" },
+  { option: "checkBox", display: "Checkbox" },
+  { option: "textarea", display: "Textarea" }
 ];
 
 const EditForm = props => {

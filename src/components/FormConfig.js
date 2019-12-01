@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 
 const popover = {
   position: "absolute",
-  zIndex: "2"
+  zIndex: "11"
 };
 
 const cover = {
@@ -23,7 +23,6 @@ const cover = {
 };
 
 const FormConfig = props => {
-  const [bgColor, setBgColor] = useState("#454a49");
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   const handleClick = () => {
