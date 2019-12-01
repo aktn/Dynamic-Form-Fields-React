@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   flex: 1;
   border-left: 1px solid #fff;
   min-height: 100vh;
-  background-color: #454a49;
+  background-color: ${props => props.bgColor};
 `;
 
 const Item = styled.div`
@@ -29,6 +29,7 @@ const Index = styled.span`
 const changeSelectionType = () => {};
 
 const DisplayForm = props => {
+  const { changeBgColor } = props;
   const items = props.items.map((item, i) => {
     return (
       <Item key={i}>
@@ -37,12 +38,13 @@ const DisplayForm = props => {
         <FormElements
           element={item}
           changeSelection={changeSelectionType}
+          handleTextChange={props.handleTextChange}
         ></FormElements>
       </Item>
     );
   });
 
-  return <Wrapper>{items}</Wrapper>;
+  return <Wrapper bgColor={changeBgColor}>{items}</Wrapper>;
 };
 
 export default DisplayForm;

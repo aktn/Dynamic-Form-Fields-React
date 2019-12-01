@@ -13,6 +13,7 @@ const Wrapper = styled.div`
 const Item = styled.div`
   padding: 30px;
   margin: 30px 35px;
+  position: relative;
 `;
 
 const textFieldStyles = {
@@ -45,7 +46,7 @@ const CreateSelectOptions = styled.div`
   padding: 2% 27%;
 `;
 
-const Test = styled.div`
+const InputWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: space-evenly;
@@ -78,7 +79,19 @@ const EditForm = props => {
 
     return (
       <Item key={i}>
-        <Test>
+        <i
+          className="fa fa-gear"
+          style={{
+            fontSize: "30px",
+            color: "#6e6959",
+            position: "absolute",
+            top: "-10px",
+            left: "-10px",
+            cursor: "pointer"
+          }}
+          onClick={props.toggleConfigBar}
+        ></i>
+        <InputWrapper>
           <DropDown
             elements={types}
             styles={dropDownStyles}
@@ -94,7 +107,7 @@ const EditForm = props => {
             onEnterField={props.onEnter}
             showMessage={true}
           ></Text>
-        </Test>
+        </InputWrapper>
 
         {item.options &&
           item.options.map((option, index) => (

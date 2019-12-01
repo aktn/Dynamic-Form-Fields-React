@@ -2,17 +2,50 @@ import React, { Component } from "react";
 import DisplayForm from "./components/DisplayForm";
 import styled from "styled-components";
 import EditForm from "./components/EditForm";
+import { ChromePicker } from "react-color";
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100vw;
   font-family: "Cutive Mono", serif;
 `;
 
+const FormConfig = styled.div`
+  display: flex;
+  flex: 1;
+  padding: 30px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex: 1;
+`;
+
+const ChangeBgBtn = styled.button`
+  padding: 10px 15px;
+`;
+
+const popover = {
+  position: "absolute",
+  zIndex: "2"
+};
+
+const cover = {
+  position: "fixed",
+  top: "0px",
+  right: "0px",
+  bottom: "0px",
+  left: "0px"
+};
+
 class App extends Component {
   state = {
     questions: [],
-    id: 1
+    id: 1,
+    configBar: false,
+    displayColorPicker: false,
+    bgColor: "#454a49"
   };
 
   componentDidMount() {
@@ -123,24 +156,66 @@ class App extends Component {
     }
   };
 
+  handleConfigBar = () => {
+    this.setState(prevState => {
+      return { configBar: !prevState.configBar };
+    });
+  };
+
+  handleClick = () => {
+    this.setState({ displayColorPicker: !this.state.displayColorPicker });
+  };
+
+  handleClose = () => {
+    this.setState({ displayColorPicker: false });
+  };
+
+  changeBgColor = value => {
+    console.log(value.hex);
+    this.setState({
+      bgColor: value.hex
+    });
+  };
+
   render() {
-    const { type, questions } = this.state;
+    const { type, questions, configBar, bgColor } = this.state;
 
     return (
       <Container>
-        <EditForm
-          value={type}
-          items={questions}
-          changeSelection={this.updateSelectionType}
-          changeLabelField={this.updateLabel}
-          onEnter={this.addQuestions}
-          createOptions={this.createOptionsForField}
-        ></EditForm>
-        <DisplayForm
-          value={type}
-          items={questions}
-          changed={this.handleTypeChange}
-        ></DisplayForm>
+        {configBar ? (
+          <FormConfig>
+            <ChangeBgBtn onClick={this.handleClick}>
+              Change Bg Color
+            </ChangeBgBtn>
+            {/* <button onClick={this.handleClick}>Pick Color</button> */}
+            {this.state.displayColorPicker ? (
+              <div style={popover}>
+                <div style={cover} onClick={this.handleClose} />
+                <ChromePicker onChange={this.changeBgColor} />
+              </div>
+            ) : null}
+          </FormConfig>
+        ) : (
+          ""
+        )}
+        <Wrapper>
+          <EditForm
+            value={type}
+            items={questions}
+            changeSelection={this.updateSelectionType}
+            changeLabelField={this.updateLabel}
+            onEnter={this.addQuestions}
+            createOptions={this.createOptionsForField}
+            toggleConfigBar={this.handleConfigBar}
+          ></EditForm>
+          <DisplayForm
+            value={type}
+            items={questions}
+            changed={this.handleTypeChange}
+            changeBgColor={bgColor}
+            handleTextChange={e => console.log(e)}
+          ></DisplayForm>
+        </Wrapper>
       </Container>
     );
   }
